@@ -4,7 +4,7 @@ var camera = new THREE.PerspectiveCamera(60, aspect, 0.1, 1000);
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-camera.position.z = 20;
+camera.position.z = 200;
 var controls = new THREE.OrbitControls(camera);
 controls.minDistance = 20;
 controls.maxDistance = 200;
@@ -76,36 +76,36 @@ var render = function () {
 
 
 
-    mercury.position.x= 20 * Math.cos(time);
-    mercury.position.y = 20 * Math.sin(time);
+    mercury.position.x= 20 * Math.cos(time*2);
+    mercury.position.y = 20 * Math.sin(time*2);
 
-    venus.position.x= 30  * Math.cos(time);
-    venus.position.y = 30 * Math.sin(time);
+    venus.position.x= 30  * Math.cos(time*1.5);
+    venus.position.y = 30 * Math.sin(time*1.5);
 
-    earth.position.x = 42 * Math.cos(time);
-    earth.position.y = 42 * Math.sin(time);
+    earth.position.x = 42 * Math.cos(time*1.2);
+    earth.position.y = 42 * Math.sin(time*1.2);
 
     moon.position.x = 3 * Math.cos(time * 2) + earth.position.x;
     moon.position.y = 3 * Math.sin(time * 2) + earth.position.y;
 
-    marte.position.x= 55 * Math.cos(time);
-    marte.position.y = 55 * Math.sin(time);
+    marte.position.x= 55 * Math.cos(time*1.6);
+    marte.position.y = 55 * Math.sin(time*1.6);
 
-    jupiter.position.x= 73 * Math.cos(time);
-    jupiter.position.y = 73 * Math.sin(time);
+    jupiter.position.x= 73 * Math.cos(time*1.7);
+    jupiter.position.y = 73 * Math.sin(time*1.7);
 
     saturn.position.x= 100 * Math.cos(time);
     saturn.position.y = 100 * Math.sin(time);
     //saturn.position.z = 130 * Math.sin(time);
 
-    uranus.position.x= 125 * Math.cos(time);
-    uranus.position.y = 125 * Math.sin(time);
+    uranus.position.x= 125 * Math.cos(time*1.5);
+    uranus.position.y = 125 * Math.sin(time*1.5);
 
-    neptune.position.x= 140 * Math.cos(time);
-    neptune.position.y = 140 * Math.sin(time);
+    neptune.position.x= 140 * Math.cos(time*1.1);
+    neptune.position.y = 140 * Math.sin(time*1.1);
 
-    pluto.position.x= 150 * Math.cos(time);
-    pluto.position.y = 150 * Math.sin(time);
+    pluto.position.x= 150 * Math.cos(time*1.8);
+    pluto.position.y = 150 * Math.sin(time*1.8);
 
     renderer.render(scene, camera);
 };
