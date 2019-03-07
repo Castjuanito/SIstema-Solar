@@ -12,25 +12,25 @@ controls.maxDistance = 200;
 
 
 var mercury = crearPlaneta(0.7,24,24,'images/mercuryTexture.png',12,0,0);
-//hacerAnillo(20, 0.05, 480, 0x757064, 0);
+hacerAnillo(20, 0.05, 480, 0x757064, 0);
 var venus = crearPlaneta(2,24,24,'images/venusTextura.jpg',12,0,0);
-//hacerAnillo(30, 0.05, 480, 0x757064, 0);
+hacerAnillo(30, 0.05, 480, 0x757064, 0);
 var earth = crearPlaneta(2, 24, 24, 'images/tierraTextura.jpg', 12, 0, 0);
-//hacerAnillo(42, 0.05, 480, 0x757064, 0);
+hacerAnillo(42, 0.05, 480, 0x757064, 0);
 var moon = crearPlaneta(0.27,24,24,'images/lunaTextura.jpeg',12,2,0);
 
 var marte = crearPlaneta(1.2,24,24,'images/marteTextura.jpg',12,0,0);
-//hacerAnillo(55, 0.05, 480, 0x757064, 0);
+hacerAnillo(55, 0.05, 480, 0x757064, 0);
 var jupiter = crearPlaneta(8,24,24,'images/jupiterTexture.jpg',12,0,0);
-
+hacerAnillo(73, 0.05, 480, 0x757064, 0);
 var saturn = crearPlaneta(6,24,24,'images/saturnTextura.jpeg',12,0,0);
-
+hacerAnillo(100, 0.05, 480, 0x757064, 0);
 var uranus = crearPlaneta(4.5,24,24,'images/uranusTextura.jpeg',12,0,0);
-
+hacerAnillo(125, 0.05, 480, 0x757064, 0);
 var neptune = crearPlaneta(4.3,24,24,'images/neptuneTextura.jpg',12,0,0);
-
+hacerAnillo(150, 0.05, 480, 0x757064, 0);
 var pluto = crearPlaneta(0.3,24,24,'images/plutoTextura.jpeg',12,0,0);
-
+hacerAnillo(140, 0.05, 480, 0x757064, 0);
 
 
 
@@ -104,8 +104,8 @@ var render = function () {
     neptune.position.x= 140 * Math.cos(time*1.1);
     neptune.position.y = 140 * Math.sin(time*1.1);
 
-    pluto.position.x= 150 * Math.cos(time*1.8);
-    pluto.position.y = 150 * Math.sin(time*1.8);
+    pluto.position.x= 150 * Math.cos(time*1.3);
+    pluto.position.y = 150 * Math.sin(time*1.3);
 
     renderer.render(scene, camera);
 };
@@ -126,7 +126,7 @@ function crearPlaneta(radioEsfera, anchoEsfera, altoEsfera, pathTextura, posicio
     return planeta;
 }
 function hacerAnillo(size, innerDiameter, facets, myColor, distanceFromAxis) {
-    var ringGeometry = new THREE.TorusGeometry(size, innerDiameter, facets, facets);
+    var ringGeometry = new THREE.RingGeometry(size, size+innerDiameter, facets);
     var ringMaterial = new THREE.MeshBasicMaterial({color: myColor, side: THREE.DoubleSide});
     myRing = new THREE.Mesh(ringGeometry, ringMaterial);
     myRing.position.set(distanceFromAxis, 0, 0);
