@@ -25,6 +25,31 @@ var jupiter = crearPlaneta(8,24,24,'images/jupiterTexture.jpg',12,0,0);
 hacerAnillo(73, 0.07, 480, 0x757064, 0);
 var saturn = crearPlaneta(6,24,24,'images/saturnTextura.jpeg',12,0,0);
 hacerAnillo(100, 0.07, 480, 0x757064, 0);
+
+var satringGeometry = new THREE.RingGeometry(7, 8, 480);
+var sattexture = new THREE.TextureLoader().load('images/anillo.jpg');
+var satringMaterial = new THREE.MeshBasicMaterial({map:sattexture, side: THREE.DoubleSide});
+var satRing = new THREE.Mesh(satringGeometry, satringMaterial);
+satRing.position.set(100, 100, 0);
+//satRing.rotation.z = Math.PI / 2;
+scene.add(satRing);
+
+var satringGeometry1 = new THREE.RingGeometry(8.1, 9, 480);
+var sattexture1 = new THREE.TextureLoader().load('images/anillo1.jpeg');
+var satringMaterial1 = new THREE.MeshBasicMaterial({map:sattexture1, side: THREE.DoubleSide});
+var satRing1 = new THREE.Mesh(satringGeometry1, satringMaterial1);
+satRing1.position.set(100, 100, 0);
+//myRing.rotation.z = Math.PI / 2;
+scene.add(satRing1);
+
+var satringGeometry2 = new THREE.RingGeometry(9.1, 10.5, 480);
+var sattexture2 = new THREE.TextureLoader().load('images/anillo2.jpeg');
+var satringMaterial2 = new THREE.MeshBasicMaterial({map:sattexture2, side: THREE.DoubleSide});
+var satRing2 = new THREE.Mesh(satringGeometry2, satringMaterial2);
+satRing2.position.set(100, 100, 0);
+//myRing.rotation.z = Math.PI / 2;
+scene.add(satRing2);
+
 var uranus = crearPlaneta(4.5,24,24,'images/uranusTextura.jpeg',12,0,0);
 hacerAnillo(125, 0.07, 480, 0x757064, 0);
 var neptune = crearPlaneta(4.3,24,24,'images/neptuneTextura.jpg',12,0,0);
@@ -88,6 +113,9 @@ var render = function () {
     marte.rotation.y += 0.01;
     sun.rotation.x += 0.0;
     sun.rotation.y += 0.01;
+    satRing.rotation.y =  Math.PI / 2;
+    satRing1.rotation.y =  Math.PI / 2;
+    satRing2.rotation.y =  Math.PI / 2;
 
     brillorojo.rotation.x -= 0.05;
     brillorojo.rotation.y -= 0.01;
@@ -118,6 +146,12 @@ var render = function () {
 
     saturn.position.x= 100 * Math.cos(time);
     saturn.position.y = 100 * Math.sin(time);
+    satRing.position.x= 100 * Math.cos(time);
+    satRing.position.y = 100 * Math.sin(time);
+    satRing1.position.x= 100 * Math.cos(time);
+    satRing1.position.y = 100 * Math.sin(time);
+    satRing2.position.x= 100 * Math.cos(time);
+    satRing2.position.y = 100 * Math.sin(time);
     //saturn.position.z = 130 * Math.sin(time);
 
     uranus.position.x= 125 * Math.cos(time*1.5);
@@ -150,7 +184,7 @@ function crearPlaneta(radioEsfera, anchoEsfera, altoEsfera, pathTextura, posicio
 function hacerAnillo(size, innerDiameter, facets, myColor, distanceFromAxis) {
     var ringGeometry = new THREE.RingGeometry(size, size+innerDiameter, facets);
     var ringMaterial = new THREE.MeshBasicMaterial({color: myColor, side: THREE.DoubleSide});
-    myRing = new THREE.Mesh(ringGeometry, ringMaterial);
+    var myRing = new THREE.Mesh(ringGeometry, ringMaterial);
     myRing.position.set(distanceFromAxis, 0, 0);
     //myRing.rotation.z = Math.PI / 2;
     scene.add(myRing);
