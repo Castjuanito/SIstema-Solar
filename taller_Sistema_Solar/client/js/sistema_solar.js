@@ -11,15 +11,15 @@ controls.maxDistance = 200;
 
 
 
-var mercury = crearPlaneta(0.7,24,24,'images/mercuryTexture.png',12,0,0);
+var mercury = crearPlanetaPro(2,24,24,'images/mercuryTexture.png',null,'images/mercurybump.jpg',12,0,0);
 hacerAnillo(20, 0.07, 480, 0x757064, 0);
-var venus = crearPlaneta(2,24,24,'images/venusTextura.jpg',12,0,0);
+var venus = crearPlaneta(3,24,24,'images/venusTextura.jpg',12,0,0);
 hacerAnillo(30, 0.07, 480, 0x757064, 0);
-var earth = crearPlaneta(2, 24, 24, 'images/tierraTextura.jpg', 12, 0, 0);
+var earth = crearPlanetaPro(7, 24, 24, 'images/earthmap1k.jpg','images/earthspec1k.jpg','images/earthbump1k.jpg',12,0,0);
+var nubes = crearNubes(7, 24, 24,'images/Earth-Clouds2700.png');
 hacerAnillo(42, 0.07, 480, 0x757064, 0);
-var moon = crearPlaneta(0.27,24,24,'images/lunaTextura.jpeg',12,2,0);
-
-var marte = crearPlaneta(1.2,24,24,'images/marteTextura.jpg',12,0,0);
+var moon = crearPlaneta(1,24,24,'images/lunaTextura.jpeg',12,2,0);
+var marte = crearPlanetaPro(5,24,24,'images/marsmap1k.jpg',null,'images/marsbump1k.jpg',12,0,0);
 hacerAnillo(55, 0.07, 480, 0x757064, 0);
 var jupiter = crearPlaneta(8,24,24,'images/jupiterTexture.jpg',12,0,0);
 hacerAnillo(73, 0.07, 480, 0x757064, 0);
@@ -29,7 +29,7 @@ var uranus = crearPlaneta(4.5,24,24,'images/uranusTextura.jpeg',12,0,0);
 hacerAnillo(125, 0.07, 480, 0x757064, 0);
 var neptune = crearPlaneta(4.3,24,24,'images/neptuneTextura.jpg',12,0,0);
 hacerAnillo(150, 0.07, 480, 0x757064, 0);
-var pluto = crearPlaneta(0.3,24,24,'images/plutoTextura.jpeg',12,0,0);
+var pluto = crearPlanetaPro(4,24,24,'images/plutomap1k.jpg',null,'images/plutobump1k.jpg',12,0,0);
 hacerAnillo(140, 0.07, 480, 0x757064, 0);
 
 
@@ -40,18 +40,18 @@ var materialSol = new THREE.MeshBasicMaterial({ map: textureSol });
 var sun = new THREE.Mesh(geometrySol, materialSol);
 
 var sphereGeom =  new THREE.SphereGeometry( 17, 10, 16 );
-var amarilloMaterial = new THREE.MeshBasicMaterial( { color: 0xff9900, transparent: true, opacity: 0.5 } );
+var amarilloMaterial = new THREE.MeshBasicMaterial( { color: 0xff9900, transparent: true, opacity: 0.1 } );
 var brilloAmarillo = new THREE.Mesh( sphereGeom, amarilloMaterial );
 
 var sphereGeom1 =  new THREE.SphereGeometry( 17, 10, 16 );
-var rojoMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, transparent: true, opacity: 0.5 } );
+var rojoMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, transparent: true, opacity: 0.1 } );
 var brillorojo = new THREE.Mesh( sphereGeom1, rojoMaterial );
 
 var sphereGeom2 =  new THREE.SphereGeometry( 17, 10, 16 );
 var naranjaMaterial = new THREE.MeshBasicMaterial( { color: 0xff6600, transparent: true, opacity: 0.5 } );
 var brillonaranja = new THREE.Mesh( sphereGeom2, naranjaMaterial );
 
-light = new THREE.PointLight(0xb4e7f2, 1.5);
+light = new THREE.PointLight(0xb4e7f2, 4);
 light.angle = Math.PI / 2;
 light.position.set(0, 0, 0);
 scene.add(light)
@@ -107,8 +107,12 @@ var render = function () {
     earth.position.x = 42 * Math.cos(time*1.2);
     earth.position.y = 42 * Math.sin(time*1.2);
 
-    moon.position.x = 3 * Math.cos(time * 2) + earth.position.x;
-    moon.position.y = 3 * Math.sin(time * 2) + earth.position.y;
+    nubes.position.x = 42 * Math.cos(time*1.2);
+    nubes.position.y = 42 * Math.sin(time*1.2);
+
+    
+    moon.position.x = 10 * Math.cos(time * 2) + earth.position.x;
+    moon.position.y = 10 * Math.sin(time * 2) + earth.position.y;
 
     marte.position.x= 55 * Math.cos(time*1.6);
     marte.position.y = 55 * Math.sin(time*1.6);
@@ -147,6 +151,47 @@ function crearPlaneta(radioEsfera, anchoEsfera, altoEsfera, pathTextura, posicio
     scene.add(planeta);
     return planeta;
 }
+
+function    crearPlanetaPro(radioEsfera, anchoEsfera, altoEsfera, pathTextura,pathEspec,pathBump, posicionX, posicionY, posicionZ) {
+    var geometry = new THREE.SphereGeometry(radioEsfera, anchoEsfera, altoEsfera);
+    //var material = new THREE.MeshBasicMaterial({ map: texture });
+        var Color = THREE.ImageUtils.loadTexture( pathTextura );
+        var Bump =  THREE.ImageUtils.loadTexture( pathBump )
+        if(pathEspec != null)
+        {
+            var Specular = THREE.ImageUtils.loadTexture( pathEspec );
+            mappedTexture = new THREE.MeshPhongMaterial( { color: 0xffffff, map: Color, specular: 0xffffff, specularMap: Specular, bumpMap: Bump, bumpScale: 20, shading: THREE.SmoothShading, emissive: 0x111111} );
+        }
+        else{
+            mappedTexture = new THREE.MeshPhongMaterial( { color: 0xffffff, map: Color, specular: 0xffffff, bumpMap: Bump, bumpScale: 20, shading: THREE.SmoothShading, emissive: 0x111111} );
+        }
+       
+
+
+    var planeta = new THREE.Mesh(geometry, mappedTexture);
+    if (posicionX != 0) { planeta.position.x = posicionX; }
+
+    if (posicionY != 0) { planeta.position.y = posicionY; }
+
+    if (posicionZ != 0) { planeta.position.z = posicionZ; }
+
+    scene.add(planeta);
+    return planeta;
+}
+
+function crearNubes(radioEsfera, anchoEsfera, altoEsfera,pathTextura){
+    var geometry = new THREE.SphereGeometry(radioEsfera + 0.2, anchoEsfera, altoEsfera);
+    var Clouds = THREE.ImageUtils.loadTexture( pathTextura );
+    skyTexture = new THREE.MeshPhongMaterial( { color: 0xffffff, map: Clouds, transparent: true, bumpMap: Clouds, bumpScale: 2, shading: THREE.SmoothShading} );
+    skyTexture.blending = THREE["CustomBlending"];
+    skyTexture.blendSrc = THREE["SrcAlphaFactor"];
+	skyTexture.blendDst = THREE["SrcAlphaFactor"];
+    skyTexture.blendEquation = THREE.AddEquation;
+    sky = new THREE.Mesh( geometry, skyTexture );
+    scene.add( sky );
+    return sky;
+}
+
 function hacerAnillo(size, innerDiameter, facets, myColor, distanceFromAxis) {
     var ringGeometry = new THREE.RingGeometry(size, size+innerDiameter, facets);
     var ringMaterial = new THREE.MeshBasicMaterial({color: myColor, side: THREE.DoubleSide});
