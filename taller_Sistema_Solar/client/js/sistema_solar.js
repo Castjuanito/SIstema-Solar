@@ -23,6 +23,15 @@ var marte = crearPlanetaPro(5,24,24,'images/marsmap1k.jpg',null,'images/marsbump
 hacerAnillo(55, 0.07, 480, 0x757064, 0);
 var jupiter = crearPlaneta(8,24,24,'images/jupitermap.jpg',12,0,0);
 hacerAnillo(73, 0.07, 480, 0x757064, 0);
+
+var moon1 = crearPlaneta(1,24,24,'images/lunaTextura.jpeg',12,2,0);
+var moon2 = crearPlaneta(0.4,24,24,'images/lunaTextura.jpeg',12,2,0);
+var moon3 = crearPlaneta(0.3,24,24,'images/lunaTextura.jpeg',12,2,0);
+var moon4 = crearPlaneta(0.8,24,24,'images/lunaTextura.jpeg',12,2,0);
+var moon5 = crearPlaneta(0.7,24,24,'images/lunaTextura.jpeg',12,2,0);
+var moon6 = crearPlaneta(1,24,24,'images/lunaTextura.jpeg',12,2,0);
+
+
 var saturn = crearPlaneta(6,24,24,'images/saturnTextura.jpeg',12,0,0);
 hacerAnillo(100, 0.07, 480, 0x757064, 0);
 
@@ -113,9 +122,12 @@ var render = function () {
     marte.rotation.y += 0.01;
     sun.rotation.x += 0.0;
     sun.rotation.y += 0.01;
-    satRing.rotation.y =  Math.PI / 2;
-    satRing1.rotation.y =  Math.PI / 2;
-    satRing2.rotation.y =  Math.PI / 2;
+    satRing.rotation.y +=  0.001*Math.PI / 2;
+    satRing1.rotation.y += 0.001 *Math.PI / 2;
+    satRing2.rotation.y +=  0.001*Math.PI / 2;
+
+
+
 
     brillorojo.rotation.x -= 0.05;
     brillorojo.rotation.y -= 0.01;
@@ -138,7 +150,7 @@ var render = function () {
     nubes.position.x = 42 * Math.cos(time*1.2);
     nubes.position.y = 42 * Math.sin(time*1.2);
 
-    
+
     moon.position.x = 10 * Math.cos(time * 2) + earth.position.x;
     moon.position.y = 10 * Math.sin(time * 2) + earth.position.y;
 
@@ -147,6 +159,20 @@ var render = function () {
 
     jupiter.position.x= 73 * Math.cos(time*1.7);
     jupiter.position.y = 73 * Math.sin(time*1.7);
+    moon1.position.x = 10 * Math.cos(time * 2) + jupiter.position.x;
+    moon1.position.y = 10 * Math.sin(time * 2) + jupiter.position.y;
+    moon2.position.x = 10 * Math.cos(time * 1.1) + jupiter.position.x;
+    moon2.position.y = 10 * Math.sin(time * 1.1) + jupiter.position.y;
+    moon3.position.x = 10 * Math.cos(time * 1.3) + jupiter.position.x;
+    moon3.position.y = 10 * Math.sin(time * 1.3) + jupiter.position.y;
+    moon4.position.x = 10 * Math.cos(time * 1.7) + jupiter.position.x;
+    moon4.position.y = 10 * Math.sin(time * 1.7) + jupiter.position.y;
+    moon5.position.x = 10 * Math.cos(time * 1.4) + jupiter.position.x;
+    moon5.position.y = 10 * Math.sin(time * 1.4) + jupiter.position.y;
+    moon6.position.x = 10 * Math.cos(time * 1.5) + jupiter.position.x;
+    moon6.position.y = 10 * Math.sin(time * 1.5) + jupiter.position.y;
+
+
 
     saturn.position.x= 100 * Math.cos(time);
     saturn.position.y = 100 * Math.sin(time);
@@ -199,7 +225,7 @@ function    crearPlanetaPro(radioEsfera, anchoEsfera, altoEsfera, pathTextura,pa
         else{
             mappedTexture = new THREE.MeshPhongMaterial( { color: 0xffffff, map: Color, specular: 0xffffff, bumpMap: Bump, bumpScale: 20, shading: THREE.SmoothShading, emissive: 0x111111} );
         }
-       
+
 
 
     var planeta = new THREE.Mesh(geometry, mappedTexture);
