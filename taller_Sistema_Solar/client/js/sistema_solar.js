@@ -21,7 +21,7 @@ hacerAnillo(42, 0.07, 480, 0x757064, 0);
 var moon = crearPlaneta(1,24,24,'images/lunaTextura.jpeg',12,2,0);
 var marte = crearPlanetaPro(5,24,24,'images/marsmap1k.jpg',null,'images/marsbump1k.jpg',12,0,0);
 hacerAnillo(55, 0.07, 480, 0x757064, 0);
-var jupiter = crearPlaneta(8,24,24,'images/jupiterTexture.jpg',12,0,0);
+var jupiter = crearPlaneta(8,24,24,'images/jupitermap.jpg',12,0,0);
 hacerAnillo(73, 0.07, 480, 0x757064, 0);
 var saturn = crearPlaneta(6,24,24,'images/saturnTextura.jpeg',12,0,0);
 hacerAnillo(100, 0.07, 480, 0x757064, 0);
